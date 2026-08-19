@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { login, fetchProfile } from '../features/auth/authSlice'
 
@@ -8,6 +8,7 @@ function SignIn() {
   const [password, setPassword] = useState('')
   const dispatch = useDispatch()
   const navigate = useNavigate()
+  const error = useSelector((state) => state.auth.error) 
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -40,6 +41,7 @@ function SignIn() {
             <label htmlFor="remember-me">Remember me</label>
           </div>
           <button className="sign-in-button">Sign In</button>
+          {error && <p style={{ color: 'red' }}>{error}</p>}
         </form>
       </section>
     </main>

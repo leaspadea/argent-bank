@@ -3,6 +3,7 @@ import Home from './pages/Home'
 import SignIn from './pages/SignIn'
 import User from './pages/User'
 import Header from './components/Header'
+import ProtectedRoute from './components/ProtectedRoute'
 import { Routes, Route } from 'react-router-dom'
 
 function App() {
@@ -12,7 +13,10 @@ function App() {
       <Routes>
         <Route path='/' element={<Home />} />
         <Route path="/login" element={<SignIn />} />
-        <Route path='/profile' element={<User />} />
+        <Route path='/profile' element={
+          <ProtectedRoute>
+            <User />
+          </ProtectedRoute>} />
       </Routes>
       <Footer />
     </>

@@ -5,8 +5,17 @@ import User from './pages/User'
 import Header from './components/Header'
 import ProtectedRoute from './components/ProtectedRoute'
 import { Routes, Route } from 'react-router-dom'
+import { useEffect } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
+import { fetchProfile } from './features/auth/authSlice'
 
 function App() {
+  const token = useSelector((state) => state.auth.token)
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    if (token) dispatch(fetchProfile())
+  }, [])
   return (
     <>
       <Header />

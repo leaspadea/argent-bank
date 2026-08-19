@@ -2,7 +2,7 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 
 
 const initialState = {
-  token: null,
+  token: localStorage.getItem('token'),
   user: null,
   status: 'idle',
   error: null,
@@ -21,7 +21,9 @@ export const login = createAsyncThunk(
     if (!response.ok) {
       return rejectWithValue('E-mail ou mot de passe incorrect !')
     }
-    return data.body.token
+    const token = data.body.token
+    localStorage.setItem('token', token)
+    return token
   }
 )
 

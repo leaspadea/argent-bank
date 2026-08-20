@@ -1,0 +1,157 @@
+swagger: '2.0'
+info:
+  title: Argent Bank Transactions API
+  description: Contains all available API endpoints for the transactions on this codebase 
+  version: '1.0.0'
+host: localhost:3001
+basePath: /api/v1
+schemes:
+  - http
+paths:
+  /accounts/{accountId}/transactions:  
+    get:                               
+      security:                        
+        - Bearer: []
+      tags:                          
+        - Transactions
+      summary: Get transactions      
+      description: Récupère les transactions d'un compte  
+      parameters:
+        - in: path
+          name: accountId
+          required: true
+          type: string
+          description: Identifiant du compte
+        - in: query
+          name: month
+          required: false
+          type: string
+          description: Filtre les transactions d'un mois
+      produces:
+        - application/json
+      responses: 
+        '200':
+          description: Transactions récupérées avec succès
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Transaction'
+        '401':
+          description: Non autorisé (token manquant ou invalide)
+        '500': 
+          description: Erreur serveur
+  /accounts/{accountId}/transactions/{transactionId}:  
+    get:                               
+      security:                        
+        - Bearer: []
+      tags:                          
+        - Transactions
+      summary: Get a transaction      
+      description: Récupère une transaction d'un compte  
+      parameters:
+        - in: path
+          name: accountId
+          required: true
+          type: string
+          description: Identifiant du compte
+        - in: path
+          name: transactionId
+          required: true
+          type: string
+          description: Identifiant d'une transaction
+      produces:
+        - application/json
+      responses: 
+        '200':
+          description: Transaction récupérée avec succès
+          schema:
+            $ref: '#/definitions/Transaction'
+        '401':
+          description: Non autorisé (token manquant ou invalide)
+        '404':
+          description: Transaction non trouvée
+        '500': 
+          description: Erreur serveur
+    patch:                               
+      security:                        
+        - Bearer: []
+      tags:                          
+        - Transactions
+      summary: Modify a transaction      
+      description: Modifie une transaction d'un compte  
+      parameters:
+        - in: path
+          name: accountId
+          required: true
+          type: string
+          description: Identifiant du compte
+        - in: path
+          name: transactionId
+          required: true
+          type: string
+          description: Identifiant d'une transaction
+        - in: body
+          name: body
+          required: true
+          description: Champs de la transaction à modifier
+          schema:
+            $ref: '#/definitions/TransactionUpdate'
+      produces:
+        - application/json
+      responses: 
+        '200':
+          description: Transaction modifiée avec succès
+          schema:
+            $ref: '#/definitions/Transaction'
+        '401':
+          description: Non autorisé (token manquant ou invalide)
+        '404':
+          description: Transaction non trouvée
+        '500': 
+          description: Erreur serveur
+securityDefinitions:
+  Bearer:
+    type: apiKey
+    name: Authorization
+    in: header
+definitions:
+  Transaction:
+    type: object
+    properties:
+      id:
+        type: string
+        description: Identifiant de la transaction
+      accountId:
+        type: string
+        description: Identifiant d'un compte
+      date:
+        type: string
+        format: date
+        description: Date d'une transaction
+      description:
+        type: string
+        description: Description d'une transaction
+      amount:
+        type: number
+        description: Montant d'une transaction
+      balance:
+        type: number
+        description: Montant total après transaction
+      transactionType:
+        type: string
+        description: Type de transaction
+      category:
+        type: string
+        description: Catégorie de la transaction
+      notes:
+        type: string
+        description: Notes d'une transaction ajouté par l'utilisateur
+  TransactionUpdate:
+    type: object
+    properties:
+      category:
+        type: string
+        description: Modification de la catégorie d'une transaction
+      notes: 
+        type: string
+        description: Modification de la note d'une transaction

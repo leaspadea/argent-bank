@@ -46,6 +46,26 @@ export const fetchProfile = createAsyncThunk(
   }
 )
 
+export const updateProfile = createAsyncThunk(
+  'auth/updateProfile',
+  async ({ firstName, lastName }, { getState, rejectWithValue }) => {
+    const token = getState().auth.token
+    const response = await fetch('http://localhost:3001/api/v1/user/profile', {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`,
+      },
+      body: JSON.stringify({ firstName, lastName }),
+    })
+    const data = await response.json()
+    if (!response.ok) {
+      return rejectWithValue(data.message)
+    }
+    return data.body
+  }
+)
+
 const authSlice = createSlice({
   name: 'auth',
   initialState,
@@ -74,6 +94,9 @@ const authSlice = createSlice({
       .addCase(fetchProfile.fulfilled, (state, action) => {
         state.user = action.payload
       })
+      .addCase(updateProfile.fulfilled, (state, action) => {
+        state.user = action.payload
+})
   },
 })
 export const { logout } = authSlice.actions

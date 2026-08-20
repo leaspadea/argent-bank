@@ -12,7 +12,7 @@ function Header() {
         <img className='main-nav-logo-image' src={logo} alt='Argent Bank' />
         <h1 className='sr-only'>Argent Bank</h1>
       </Link>
-      <div>
+      <div className="main-nav-items">
         {user ? (
           <>
             <Link to="/profile" className='main-nav-item'>

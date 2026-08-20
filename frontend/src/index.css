@@ -8,13 +8,20 @@ html {
 
 body {
   margin: 0;
+}
+
+#root {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
 }
 
-.main {
+main {
   flex: 1;
+}
+
+.main {
+  padding: 2rem 0;
 }
 
 .bg-dark {
@@ -39,7 +46,7 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 5px 20px;
+  padding: 10px 20px;
 }
 
 .main-nav a {
@@ -52,12 +59,56 @@ body {
 }
 
 .main-nav-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
   text-decoration: none;
-  margin-right: 0.5rem;
+  font-size: 1rem;
+  white-space: nowrap;
+}
+
+.main-nav-item svg {
+  width: 1rem;
+  height: 1rem;
+}
+
+@media (min-width: 720px) {
+  .main-nav-item {
+    font-size: 1.3rem;
+  }
+
+  .main-nav-item svg {
+    width: 1.4rem;
+    height: 1.4rem;
+  }
+
+  .main-nav-items {
+    gap: 1.5rem;
+  }
+
+  .main-nav-logo-image {
+    width: 200px;
+  }
 }
 
 .main-nav-item:hover {
   text-decoration: underline;
+}
+
+.main-nav-items {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+button.main-nav-item {
+  background: none;
+  border: none;
+  padding: 0;
+  font-family: inherit;
+  font-weight: bold;
+  color: #2c3e50;
+  cursor: pointer;
 }
 
 .main-nav-logo {
@@ -67,7 +118,7 @@ body {
 
 .main-nav-logo-image {
   max-width: 100%;
-  width: 200px;
+  width: 130px;
 }
 
 .hero {
@@ -160,8 +211,8 @@ body {
   font-size: 1.1rem;
   font-weight: bold;
   margin-top: 1rem;
-  border-color: #00bc77;
-  background-color: #00bc77;
+  border-color: #5b52e0;
+  background-color: #5b52e0;
   color: #fff;
 }
 
@@ -251,9 +302,15 @@ body {
   flex: 1;
 }
 
+.account-content-wrapper.cta {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .edit-button {
-  border-color: #00bc77;
-  background-color: #00bc77;
+  border-color: #5b52e0;
+  background-color: #5b52e0;
   color: #fff;
   font-weight: bold;
   padding: 10px;
@@ -271,8 +328,8 @@ body {
   font-size: 1.1rem;
   font-weight: bold;
   margin-top: 1rem;
-  border-color: #00bc77;
-  background-color: #00bc77;
+  border-color: #5b52e0;
+  background-color: #5b52e0;
   color: #fff;
 }
 
@@ -287,5 +344,46 @@ body {
 
   .transaction-button {
     width: 200px;
+    margin-top: 0;
   }
+}
+
+/* Formulaire d'édition du profil (mode Edit Name) */
+.edit-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.edit-form-fields,
+.edit-form-actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.edit-form input {
+  width: 150px;
+  padding: 5px;
+  font-size: 1.2rem;
+}
+
+.edit-form button {
+  width: 100px;
+  padding: 8px;
+  font-weight: bold;
+  color: #5b52e0;
+  background-color: #fff;
+  border: 1px solid #5b52e0;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.sign-in-button,
+.edit-button,
+.transaction-button {
+  border-radius: 4px;
 }

@@ -47,11 +47,15 @@ function User() {
         {isEditing ? (
           <>
             <h1>Welcome back</h1>
-            <form onSubmit={handleSave}>
-              <input type="text" aria-label="Prénom" value={firstName} onChange={(e) => setFirstName(e.target.value)} />
-              <input type="text" aria-label="Nom" value={lastName} onChange={(e) => setLastName(e.target.value)} />
-              <button type="button" onClick={() => setIsEditing(false)}>Cancel</button>
-              <button type="submit">Save</button>
+            <form className="edit-form" onSubmit={handleSave}>
+              <div className="edit-form-fields">
+                <input type="text" aria-label="Prénom" value={firstName} onChange={(e) => setFirstName(e.target.value)} />
+                <input type="text" aria-label="Nom" value={lastName} onChange={(e) => setLastName(e.target.value)} />
+              </div>
+              <div className="edit-form-actions">
+                <button type="submit">Save</button>
+                <button type="button" onClick={() => setIsEditing(false)}>Cancel</button>
+              </div>
             </form>
           </>
         ) : (

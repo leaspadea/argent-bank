@@ -41,7 +41,7 @@ function SignIn() {
             <label htmlFor="remember-me">Remember me</label>
           </div>
           <button className="sign-in-button">Sign In</button>
-          {error && <p style={{ color: 'red' }}>{error}</p>}
+          {error && <p style={{ color: '#cc0000' }}>{error}</p>}
         </form>
       </section>
     </main>

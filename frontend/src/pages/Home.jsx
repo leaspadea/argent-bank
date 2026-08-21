@@ -29,7 +29,7 @@ function Home() {
     <main>
       <div className='hero'>
         <section className='hero-content'>
-          <h2 className='sr-only'>Promoted Content</h2>
+          <h1 className='sr-only'>Argent Bank</h1>
           <p className="subtitle">No fees.</p>
           <p className="subtitle">No minimum deposit.</p>
           <p className="subtitle">High interest rates.</p>

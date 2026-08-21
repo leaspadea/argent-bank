@@ -1,72 +1,142 @@
-# Project #10 - Argent Bank API
+# 🏦 Argent Bank — Application bancaire React & Redux
 
-This codebase contains the code needed to run the backend for Argent Bank.
+> Application web bancaire développée en React avec gestion d'état globale via Redux (Redux Toolkit). Authentification sécurisée par token, page profil protégée, édition des informations utilisateur et persistance de session. Le projet inclut également la **conception** de l'API des transactions, documentée en Swagger.
 
-## Getting Started
+## 🚀 Démo en ligne
 
-### Prerequisites
+> ⚠️ Le projet n'est pas déployé en ligne : l'application repose sur un back-end (Node / Express / MongoDB) qui tourne en local (port 3001). Pour tester le site, suivez la section [Installation](#-installation) pour lancer le back-end, la base de données et le front.
 
-Argent Bank uses the following tech stack:
+## 🎯 Contexte du projet
 
-- [Node.js v12](https://nodejs.org/en/)
-- [MongoDB Community Server](https://www.mongodb.com/try/download/community)
+Argent Bank est une nouvelle banque en ligne qui souhaite percer sur le marché. Le projet se déroule en deux phases : la mise en place de l'**authentification des utilisateurs** (implémentée) et la **conception de l'API des transactions** (documentation seule, sans implémentation).
 
-Please make sure you have the right versions and download both packages. You can verify this by using the following commands in your terminal:
+**Mission :** développer le front-end en **React** avec une gestion de l'état global via **Redux**, en implémentant l'authentification (connexion, déconnexion, page profil protégée, édition du profil) à partir des maquettes fournies ; puis **concevoir** le contrat de l'API des transactions au format **Swagger**.
 
-```bash
-# Check Node.js version
-node --version
+## 🛠️ Technologies utilisées
 
-# Check Mongo version
-mongo --version
+- **React 19** — composants fonctionnels et hooks
+- **Redux Toolkit** & **React-Redux** — état global (store, slices, thunks asynchrones)
+- **React Router** — navigation déclarative et route protégée
+- **Vite** — outil de build et serveur de développement
+- **Fetch API** — appels à l'API REST
+- **Swagger 2.0 (OpenAPI)** — conception et documentation de l'API des transactions
+- **ESLint** — analyse statique et qualité de code
+- **Git / GitHub** — versioning
+
+## ✨ Fonctionnalités principales
+
+- ✅ **Page d'accueil** présentant les services de la banque
+- ✅ **Connexion** sécurisée avec gestion des erreurs d'identifiants
+- ✅ **Route protégée** : la page profil redirige vers la connexion si l'utilisateur n'est pas authentifié
+- ✅ **Page profil** affichant les informations réelles de l'utilisateur connecté
+- ✅ **Édition du profil** (prénom et nom) avec répercussion immédiate de l'affichage (nom, en-tête)
+- ✅ **Déconnexion** vidant le store et le stockage local
+- ✅ **Persistance de session** : le token est conservé dans `localStorage` (l'utilisateur reste connecté après un rechargement)
+- ✅ **Conception de l'API des transactions** documentée en **Swagger** (`swagger-transactions.yaml`)
+- ✅ Site **responsive**, **accessible** (score Lighthouse 100) et validé **W3C**
+
+## 📐 Structure du projet
+
+```text
+argent-bank/
+├── frontend/                     # Application React (mon travail)
+│   ├── src/
+│   │   ├── app/                  # store Redux (store.js)
+│   │   ├── features/auth/        # slice d'authentification (authSlice.js)
+│   │   ├── components/           # Header, Footer, FeatureCard, Account, ProtectedRoute
+│   │   ├── pages/                # Home, SignIn, User
+│   │   ├── assets/img/           # images optimisées
+│   │   ├── App.jsx               # routeur et structure commune
+│   │   ├── main.jsx              # point d'entrée (Provider, BrowserRouter)
+│   │   └── index.css             # styles
+│   └── public/
+├── server/                       # back-end fourni (Node / Express / MongoDB)
+├── designs/                      # maquettes HTML/CSS de départ
+├── swagger-transactions.yaml     # conception de l'API des transactions (Phase 2)
+└── README.md
 ```
 
-### Instructions
+## 🎓 Compétences travaillées
 
-1. Fork this repo
-1. Clone the repo onto your computer
-1. Open a terminal window in the cloned project
-1. Run the following commands:
+- Gestion de l'**état global** d'une application avec **Redux Toolkit** (store, `createSlice`, `createAsyncThunk`)
+- **Authentification** par token : connexion, route protégée, persistance en `localStorage`, déconnexion
+- Consommation d'une **API REST** avec `fetch` (opérations asynchrones et gestion des erreurs)
+- **Navigation** et protection de routes avec React Router
+- **Conception d'API** : traduire une maquette en contrat **Swagger** (routes, paramètres, réponses, modèles de données)
+- **Green Code** : optimisation des images (poids et dimensions) et composants réutilisables
+- Qualité : **accessibilité** (Lighthouse 100), validation **W3C**, performances
+
+## 📦 Prérequis
+
+- **Node.js** (version 20 ou supérieure ; projet développé avec Node 24)
+- **npm**
+- **MongoDB Community Server** installé et lancé en local
+
+## 🚀 Installation
+
+Le projet nécessite de lancer **deux serveurs** en parallèle : le **back-end** (fourni, port 3001) et le **front** (port 5173).
+
+### 1. Cloner le dépôt
 
 ```bash
-# Install dependencies
+git clone https://github.com/leaspadea/argent-bank.git
+cd argent-bank
+```
+
+### 2. Lancer le back-end (port 3001)
+
+À la racine du projet :
+
+```bash
 npm install
-
-# Start local dev server
 npm run dev:server
+```
 
-# Populate database with two users
+Puis, dans un autre terminal, peupler la base de données avec deux utilisateurs de test :
+
+```bash
 npm run populate-db
 ```
 
-Your server should now be running at http://locahost:3001 and you will now have two users in your MongoDB database!
+Le back-end tourne alors sur `http://localhost:3001` (documentation Swagger disponible sur `/api-docs`).
 
-## Populated Database Data
+**Utilisateurs de test :**
 
-Once you run the `populate-db` script, you should have two users in your database:
+| Email | Mot de passe |
+|-------|--------------|
+| `tony@stark.com` | `password123` |
+| `steve@rogers.com` | `password456` |
 
-### Tony Stark
+### 3. Lancer le front (port 5173)
 
-- First Name: `Tony`
-- Last Name: `Stark`
-- Email: `tony@stark.com`
-- Password: `password123`
+Dans un autre terminal :
 
-### Steve Rogers
+```bash
+cd frontend
+npm install
+npm run dev
+```
 
-- First Name: `Steve`,
-- Last Name: `Rogers`,
-- Email: `steve@rogers.com`,
-- Password: `password456`
+Le site est accessible sur `http://localhost:5173`.
 
-## API Documentation
+## 🧰 Scripts disponibles (front)
 
-To learn more about how the API works, once you have started your local environment, you can visit: http://localhost:3001/api-docs
+| Commande | Description |
+|----------|-------------|
+| `npm run dev` | Lance le serveur de développement (Vite) |
+| `npm run build` | Génère la version de production dans `/dist` |
+| `npm run preview` | Prévisualise le build de production en local |
+| `npm run lint` | Analyse le code avec ESLint |
 
-## Design Assets
+## 👤 Auteur
 
-Static HTML and CSS has been created for most of the site and is located in: `/designs`.
+**Léa Spadea** — Étudiante Intégratrice Web @ OpenClassrooms
+🔗 [LinkedIn](https://www.linkedin.com/in/lea-spadea/) · 💻 [GitHub](https://github.com/leaspadea)
 
-For some of the dynamic features, like toggling user editing, there is a mock-up for it in `/designs/wireframes/edit-user-name.png`.
+## 📄 Licence
 
-And for the API model that you will be proposing for transactitons, the wireframe can be found in `/designs/wireframes/transactions.png`.
+Ce projet est sous licence **MIT**.
+
+---
+
+*Projet réalisé dans le cadre de la formation Intégrateur Web (RNCP niveau 5) chez OpenClassrooms.*

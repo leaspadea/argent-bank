@@ -81,14 +81,6 @@ main {
     width: 1.4rem;
     height: 1.4rem;
   }
-
-  .main-nav-items {
-    gap: 1.5rem;
-  }
-
-  .main-nav-logo-image {
-    width: 200px;
-  }
 }
 
 .main-nav-item:hover {
@@ -119,6 +111,16 @@ button.main-nav-item {
 .main-nav-logo-image {
   max-width: 100%;
   width: 130px;
+}
+
+@media (min-width: 720px) {
+  .main-nav-items {
+    gap: 1.5rem;
+  }
+
+  .main-nav-logo-image {
+    width: 200px;
+  }
 }
 
 .hero {

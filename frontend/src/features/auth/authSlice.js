@@ -1,5 +1,5 @@
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
-
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import { API_BASE_URL } from '../../config';
 
 const initialState = {
   token: localStorage.getItem('token'),
@@ -11,7 +11,7 @@ const initialState = {
 export const login = createAsyncThunk(
   'auth/login',
   async ({ email, password }, { rejectWithValue }) => {
-    const response = await fetch('http://localhost:3001/api/v1/user/login', {
+    const response = await fetch(`${API_BASE_URL}/user/login`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ email, password }),
@@ -31,7 +31,7 @@ export const fetchProfile = createAsyncThunk(
   'auth/fetchProfile',
   async (_, { getState, rejectWithValue }) => {
     const token = getState().auth.token
-    const response = await fetch('http://localhost:3001/api/v1/user/profile', {
+    const response = await fetch(`${API_BASE_URL}/user/profile`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -50,7 +50,7 @@ export const updateProfile = createAsyncThunk(
   'auth/updateProfile',
   async ({ firstName, lastName }, { getState, rejectWithValue }) => {
     const token = getState().auth.token
-    const response = await fetch('http://localhost:3001/api/v1/user/profile', {
+    const response = await fetch(`${API_BASE_URL}/user/profile`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',

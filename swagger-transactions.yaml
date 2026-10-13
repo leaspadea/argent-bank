@@ -26,7 +26,7 @@ paths:
           name: month
           required: false
           type: string
-          description: Filtre les transactions d'un mois
+          description: Filtre les transactions du mois courant
       produces:
         - application/json
       responses: 
@@ -38,6 +38,8 @@ paths:
               $ref: '#/definitions/Transaction'
         '401':
           description: Non autorisé (token manquant ou invalide)
+        '403':
+          description: Accès interdit (ce compte n'appartient pas à l'utilisateur)
         '500': 
           description: Erreur serveur
   /accounts/{accountId}/transactions/{transactionId}:  
@@ -68,6 +70,8 @@ paths:
             $ref: '#/definitions/Transaction'
         '401':
           description: Non autorisé (token manquant ou invalide)
+        '403':
+          description: Accès interdit (ce compte n'appartient pas à l'utilisateur)
         '404':
           description: Transaction non trouvée
         '500': 
@@ -105,6 +109,8 @@ paths:
             $ref: '#/definitions/Transaction'
         '401':
           description: Non autorisé (token manquant ou invalide)
+        '403':
+          description: Accès interdit (ce compte n'appartient pas à l'utilisateur)
         '404':
           description: Transaction non trouvée
         '500': 
